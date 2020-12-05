@@ -1,8 +1,9 @@
+import 'package:flutter/material.dart';
+import 'package:ui_app/src/components/drawer.dart';
+import 'package:ui_app/src/components/sliding_cards.dart';
+
 import 'dart:math';
 import 'dart:ui';
-
-import 'package:ui_app/src/components/drawer.dart';
-import 'package:flutter/material.dart';
 
 class BotonesPage extends StatelessWidget {
   @override
@@ -14,7 +15,7 @@ class BotonesPage extends StatelessWidget {
             _fondoApp(),
             SingleChildScrollView(
               child: Column(
-                children: <Widget>[_titulos(), _botonesRedondeados()],
+                children: <Widget>[_titulos(), SlidingCardsView()],
               ),
             )
           ],
@@ -39,15 +40,14 @@ class BotonesPage extends StatelessWidget {
     final cajaRosa = Transform.rotate(
         angle: -pi / 5.0,
         child: Container(
-          height: 360.0,
-          width: 360.0,
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(80.0),
-              gradient: LinearGradient(colors: [
-                Color.fromRGBO(236, 98, 188, 1.0),
-                Color.fromRGBO(241, 142, 172, 1.0)
-              ])),
-        ));
+            height: 360.0,
+            width: 360.0,
+            decoration: BoxDecoration(
+                gradient: LinearGradient(
+                    colors: [Colors.yellow, Colors.orange, Colors.red],
+                    stops: [0.5, 0.5, 0.8],
+                    begin: FractionalOffset.topCenter,
+                    end: FractionalOffset.bottomCenter))));
 
     return Stack(
       children: <Widget>[gradiente, Positioned(top: -100.0, child: cajaRosa)],
@@ -63,12 +63,12 @@ class BotonesPage extends StatelessWidget {
           children: <Widget>[
             Text('Classify transaction',
                 style: TextStyle(
-                    color: Colors.white,
+                    color: Colors.black,
                     fontSize: 30.0,
                     fontWeight: FontWeight.bold)),
             SizedBox(height: 10.0),
             Text('Classify this transaction into a particular category',
-                style: TextStyle(color: Colors.white, fontSize: 18.0)),
+                style: TextStyle(color: Colors.black, fontSize: 18.0)),
           ],
         ),
       ),
@@ -84,10 +84,13 @@ class BotonesPage extends StatelessWidget {
               caption: TextStyle(color: Color.fromRGBO(116, 117, 152, 1.0)))),
       child: BottomNavigationBar(
         items: [
-          BottomNavigationBarItem(icon: Icon(Icons.calendar_today, size: 30.0)),
-          BottomNavigationBarItem(icon: Icon(Icons.bubble_chart, size: 30.0)),
           BottomNavigationBarItem(
-              icon: Icon(Icons.supervised_user_circle, size: 30.0)),
+              icon: Icon(Icons.calendar_today, size: 30.0), title: Container()),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.bubble_chart, size: 30.0), title: Container()),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.supervised_user_circle, size: 30.0),
+              title: Container()),
         ],
       ),
     );
@@ -142,6 +145,86 @@ class BotonesPage extends StatelessWidget {
             ],
           ),
         ),
+      ),
+    );
+  }
+}
+
+class SlidingCard extends StatelessWidget {
+  final String name;
+  final String date;
+  final String assetName;
+  final double offset;
+
+  SlidingCard({
+    Key key,
+    @required this.name,
+    @required this.date,
+    @required this.assetName,
+    @required this.offset,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      margin: EdgeInsets.only(left: 8, right: 8, bottom: 24),
+      elevation: 8,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(32)),
+      child: Column(
+        children: <Widget>[
+          ClipRRect(
+            borderRadius: BorderRadius.vertical(top: Radius.circular(32)),
+            child: Image.asset(
+              'assets/$assetName',
+              height: MediaQuery.of(context).size.height * 0.3,
+              alignment: Alignment(-offset, 0),
+              fit: BoxFit.none,
+            ),
+          ),
+          SizedBox(height: 8),
+          Expanded(child: CardContent(name: name, date: date))
+        ],
+      ),
+    );
+  }
+}
+
+class CardContent extends StatelessWidget {
+  final String name;
+  final String date;
+
+  CardContent({@required this.name, @required this.date});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.all(8.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Text(name, style: TextStyle(fontSize: 20)),
+          SizedBox(height: 8),
+          Text(date, style: TextStyle(color: Colors.grey)),
+          Spacer(),
+          Row(
+            children: <Widget>[
+              RaisedButton(
+                color: Color(0xFF162A49),
+                child: Text('Reserve'),
+                textColor: Colors.white,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(32)),
+                onPressed: () {},
+              ),
+              Spacer(),
+              Text(
+                '0.00 \$',
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+              ),
+              SizedBox(width: 16)
+            ],
+          )
+        ],
       ),
     );
   }

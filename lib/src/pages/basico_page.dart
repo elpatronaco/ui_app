@@ -7,7 +7,7 @@ import 'package:ui_app/src/pages/hero_page.dart';
 import 'package:flutter/services.dart';
 
 class BasicoPage extends StatelessWidget {
-  Parallax() {
+  BasicoPage() {
     SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   }
 

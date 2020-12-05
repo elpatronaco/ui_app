@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ui_app/src/pages/basico_page.dart';
-import 'package:ui_app/src/pages/scroll_page.dart';
+import 'package:ui_app/src/pages/botones_page.dart';
 import 'package:ui_app/src/pages/parallax.dart';
 
 class CustomDrawer extends StatelessWidget {
@@ -42,17 +42,17 @@ class CustomDrawer extends StatelessWidget {
             },
           ),
           ListTile(
-            title: Text('Scroll Page'),
-            onTap: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => ScrollPage()));
-            },
-          ),
-          ListTile(
             title: Text('Parallax'),
             onTap: () {
               Navigator.push(
                   context, MaterialPageRoute(builder: (context) => Parallax()));
+            },
+          ),
+          ListTile(
+            title: Text('Botones'),
+            onTap: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => BotonesPage()));
             },
           ),
         ],
