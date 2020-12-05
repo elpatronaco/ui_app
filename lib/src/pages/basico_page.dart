@@ -3,8 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:share/share.dart';
 import 'package:ui_app/src/components/drawer.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:ui_app/src/pages/hero_page.dart';
+import 'package:flutter/services.dart';
 
 class BasicoPage extends StatelessWidget {
+  Parallax() {
+    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+  }
+
   final estiloTitulo = TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold);
   final estiloSubTitulo = TextStyle(fontSize: 18.0, color: Colors.grey);
 
@@ -43,13 +49,19 @@ class BasicoPage extends StatelessWidget {
                       return Builder(
                         builder: (BuildContext context) {
                           return Container(
-                            width: MediaQuery.of(context).size.width,
-                            decoration: BoxDecoration(color: Colors.deepOrange),
-                            child: Image(
-                              image: AssetImage("assets/$i"),
-                              fit: BoxFit.cover,
-                            ),
-                          );
+                              width: MediaQuery.of(context).size.width,
+                              decoration:
+                                  BoxDecoration(color: Colors.grey.shade200),
+                              child: GestureDetector(
+                                onTap: () => Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => DetailScreen(i))),
+                                child: Image(
+                                  image: AssetImage("assets/$i"),
+                                  fit: BoxFit.cover,
+                                ),
+                              ));
                         },
                       );
                     }).toList(),
@@ -161,32 +173,6 @@ class BasicoPage extends StatelessWidget {
           'Sit minim aliqua minim laborum duis occaecat consectetur aliquip id ad deserunt. Adipisicing qui reprehenderit eu eu qui occaecat exercitation et aliqua laboris dolor. Nisi duis consectetur veniam id nulla deserunt aliqua velit ullamco. Deserunt exercitation adipisicing nostrud amet eu.',
           textAlign: TextAlign.justify,
         ),
-      ),
-    );
-  }
-}
-
-class DetailScreen extends StatelessWidget {
-  DetailScreen(this.imageLocation);
-
-  final String imageLocation;
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: GestureDetector(
-        child: Container(
-          width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height,
-          child: Hero(
-            tag: 'imageHero',
-            child: Image(
-                image: AssetImage("assets/$imageLocation"), fit: BoxFit.cover),
-          ),
-        ),
-        onTap: () {
-          Navigator.pop(context);
-        },
       ),
     );
   }

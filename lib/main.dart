@@ -3,6 +3,7 @@ import 'package:ui_app/src/pages/botones_page.dart';
 import 'package:ui_app/src/pages/scroll_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:ui_app/src/pages/hero_page.dart';
 
 void main() => runApp(MyApp());
 
@@ -20,6 +21,7 @@ class MyApp extends StatelessWidget {
         'basico': (BuildContext context) => BasicoPage(),
         'scroll': (BuildContext context) => ScrollPage(),
         'botones': (BuildContext context) => BotonesPage(),
+        'hero': (BuildContext context) => DetailScreen("empirestate1.jpg")
       },
     );
   }

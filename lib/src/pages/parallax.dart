@@ -5,7 +5,7 @@ import 'package:ui_app/src/components/drawer.dart';
 
 class Parallax extends StatefulWidget {
   Parallax() {
-    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+    SystemChrome.setPreferredOrientations([DeviceOrientation.landscapeLeft]);
   }
 
   @override
@@ -71,7 +71,7 @@ class _MyHomePageState extends State<Parallax> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
                       Text(
-                        "Parallax A",
+                        "Parallax a",
                         style: TextStyle(
                             fontSize: 30,
                             fontFamily: "MontSerrat-ExtraLight",
